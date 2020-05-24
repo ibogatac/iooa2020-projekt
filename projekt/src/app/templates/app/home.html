@@ -1,0 +1,27 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<h1>Početna stranica knjižnice</h1>
+
+<p>Dostupni zapisi:</p>
+
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Knjige
+    <span class="badge badge-primary badge-pill">{{br_knjiga}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Izdanja
+    <span class="badge badge-primary badge-pill">{{br_izdanja}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Dostupne knjige
+    <span class="badge badge-primary badge-pill">{{br_izdanja_d}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Posudjene knjige
+    <span class="badge badge-primary badge-pill">{{br_izdanja_p}}</span>
+  </li>
+</ul>
+
+{%endblock content%}
