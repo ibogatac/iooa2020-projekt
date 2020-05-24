@@ -31,8 +31,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'Knjiznica-home' %}">Posuđene knjige</a>
-              <a class="nav-item nav-link" href="{% url 'Knjiznica-about' %}">Neposuđene knjige</a>
+              <a class="nav-item nav-link" href="{% url 'Knjiznica-pknjige' %}">Posuđene knjige</a>
+              <a class="nav-item nav-link" href="{% url 'Knjiznica-neposudjene knjige' %}">Neposuđene knjige</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -50,13 +50,11 @@
         </div>
         <div class="col-md-4">
           <div class="content-section">
-            <h3>Sidebar</h3>
-            <p class='text-muted'>Test
+            
+            <p>
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">#</li>
-                <li class="list-group-item list-group-item-light">#</li>
-                <li class="list-group-item list-group-item-light">#</li>
-                <li class="list-group-item list-group-item-light">#</li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'Knjiznica-pknjige' %}">Posuđene knjige</a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'Knjiznica-neposudjene knjige' %}">Neposuđene knjige</a></li>
               </ul>
             </p>
           </div>
