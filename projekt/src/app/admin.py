@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Permission
 
 # Register your models here.
 from .models import Knjiga, KnjigaIzdanje
@@ -12,15 +13,19 @@ class KnjigaAdmin(admin.ModelAdmin):
 
 class KnjigaIzdanjeAdmin(admin.ModelAdmin):
 	
-	list_display = ['id','Naziv','status']
+	list_display = ['id','Naziv','status','vracanje', 'posudjivac']
 
 	def Naziv(self, obj):
 		return obj.knjiga.naziv
 	Naziv.admin_order_field = 'id'
 	Naziv.short_description = 'Naziv Knjige'
+
+	
 		
 
 
 
 admin.site.register(Knjiga, KnjigaAdmin)
 admin.site.register(KnjigaIzdanje, KnjigaIzdanjeAdmin)
+
+

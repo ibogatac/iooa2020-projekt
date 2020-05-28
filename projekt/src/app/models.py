@@ -1,6 +1,8 @@
 from django.db import models
 import uuid
-
+from django.contrib.auth.models import User
+from datetime import date
+from django.urls import reverse
 # Create your models here.
 
 class Knjiga(models.Model):
@@ -8,7 +10,6 @@ class Knjiga(models.Model):
 	autor = models.CharField(max_length = 30)
 	izdavacka_kuca = models.CharField(max_length = 50)
 	godina_izdanja = models.DateField(auto_now_add = False, auto_now = False)
-	
 
 	def __str__(self):
 		return self.naziv
@@ -20,26 +21,40 @@ class KnjigaIzdanje(models.Model):
     knjiga = models.ForeignKey('Knjiga', on_delete=models.SET_NULL, null=True) 
     izdanje = models.CharField(max_length=200)
     vracanje = models.DateField(null=True, blank=True)
+    posudjivac = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+
 
     STATUS_KNJIGE = (
-        ('u', 'U pripravnosti'),
+        
         ('p', 'Posudjena'),
         ('d', 'Dostupna'),
-        ('r', 'Rezervirana'),
+        
     )
 
     status = models.CharField(
         max_length=1,
         choices=STATUS_KNJIGE,
         blank=True,
-        default='u',
-        help_text='Dostupnost knjige',
+        default='d',
+        
     )
-
     class Meta:
         ordering = ['vracanje']
+        permissions = (('obnova', 'obnoviti'),)
+        
+    
 
-    def __str__(self):
-        return f'{self.id} ({self.knjiga.naziv})'
+    @property
+    def vratiti(self):
+
+        if self.vracanje and date.today() > self.vracanje:
+            return True
+        return False
+
+
+    
+
+
 
 

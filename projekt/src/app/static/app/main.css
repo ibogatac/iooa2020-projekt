@@ -28,3 +28,9 @@ ul {
   font-weight: 500;
 }
 
+.btn{
+  position: fixed; /* or absolute */
+  top: 45%;
+  left: 50%;
+}
+

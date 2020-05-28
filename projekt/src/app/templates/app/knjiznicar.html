@@ -1,0 +1,15 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    <h1>Obnova datuma {{knjiga_izdanje.knjiga.naziv}}</h1>
+    <p>Posuđivač: {{knjiga_izdanje.posudjivac}}</p>
+    <p{% if knjiga_izdanje.vratiti %} class="text-danger"{% endif %}>Datum vraćanja: {{knjiga_izdanje.vracanje}}</p>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Promijeni" />
+    </form>
+{% endblock %}

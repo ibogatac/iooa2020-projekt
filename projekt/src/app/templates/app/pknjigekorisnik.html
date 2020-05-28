@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    <h1>Moje posuđene knjige</h1>
+
+    {% if knjigaizdanje_list %}
+    <div class="list-group">
+
+      {% for knjigaizdanje in knjigaizdanje_list %} 
+      {% if knjigaizdanje.vratiti %}
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-danger">
+      {%else%}
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      {% endif %}
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{knjigaizdanje.knjiga.naziv}}</h5>
+          <small>({{ knjigaizdanje.vracanje }})</small>
+        </div>
+      </a>
+      {% endfor %}
+     </div>
+
+    {% else %}
+      <p>Nema posuđenih knjiga.</p>
+    {% endif %}       
+{% endblock %}

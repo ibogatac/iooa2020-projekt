@@ -1,0 +1,22 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Popis Knjiga</h1>
+
+    {% if knjiga_list %}
+    <ul>
+
+      {% for knjiga in knjiga_list %}
+      <li>
+        <a>{{ knjiga.naziv }}</a> - {{knjiga.autor}}
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>Nema knjiga.</p>
+    {% endif %}   
+    {%endif%}    
+{% endblock %}
