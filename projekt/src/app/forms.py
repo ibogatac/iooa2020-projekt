@@ -12,32 +12,34 @@ class KnjigaForm(forms.ModelForm):
 		fields = ['naziv', 'autor', 'izdavacka_kuca', 'godina_izdanja']
 
 
-class ObnoviForm(forms.Form):
-    obnovi_datum = forms.DateField(
-            help_text="Unesti datum između sada i 4 tjedna")
+class ObnoviForm(forms.ModelForm):
 
-
-    def clean_obnova_datum(self):
-        data = self.cleaned_data['obnovi_datum']
-
-        if data < datetime.date.today():
-            raise ValidationError(_('Nevažeći datum - datum u prošlosti'))
-        if data > datetime.date.today() + datetime.timedelta(weeks=4):
-            raise ValidationError(
-                _('Nevažeći datum - datum više od 4 tjedna ispred'))
-        return data
-
+    class Meta:
+        model = KnjigaIzdanje
+        fields = ['vracanje']
+    vracanje = forms.DateField(
+        widget=forms.DateInput(format='%d.%m.%Y'),
+        input_formats=('%d.%m.%Y', )
+        )
 
 class KnjigaIzdanjeForm(forms.ModelForm):
     class Meta:
         model = KnjigaIzdanje
-        fields = ['status', 'vracanje']
+        fields = ['status','posudjivac','vracanje']
+    vracanje = forms.DateField(
+        widget=forms.DateInput(format='%d.%m.%Y'),
+        input_formats=('%d.%m.%Y', )
+        )
 
 
 class KnjigaIzdanjePForm(forms.ModelForm):
     class Meta:
         model = KnjigaIzdanje
-        fields = ['status', 'vracanje']
+        fields = ['status', 'posudjivac', 'vracanje']
+    vracanje = forms.DateField(
+        widget=forms.DateInput(format='%d.%m.%Y'),
+        input_formats=('%d.%m.%Y', )
+        )
 
 
 

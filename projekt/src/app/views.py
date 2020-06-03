@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Knjiga, KnjigaIzdanje
+from .models import Knjiga, KnjigaIzdanje, Autor, Zanr
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.contrib.auth.decorators import login_required
@@ -91,27 +91,23 @@ class ListaSvihNKnjiga(PermissionRequiredMixin, generic.ListView):
 
 
 
-@permission_required('app.obnova')
-def obnoviKnjigu(request, pk):
-    knjiga_izdanje = get_object_or_404(KnjigaIzdanje, pk=pk)
-    
-    if request.method == 'POST':
-        form = ObnoviForm(request.POST)
+class obnoviKnjigu(PermissionRequiredMixin, UpdateView):
 
-        if form.is_valid():
-            knjiga_izdanje.vracanje = form.cleaned_data['obnovi_datum']
-            knjiga_izdanje.save()
-            return HttpResponseRedirect(reverse('posudjeno-sve'))
+   
+    model = KnjigaIzdanje
+    form_class = ObnoviForm
+    permission_required = 'app.obnova'
 
-    else:
-        form = ObnoviForm()
+    def get_object(self):
+        pk_ = self.kwargs.get("pk")
+        return get_object_or_404(KnjigaIzdanje, pk=pk_)
 
-    context = {
-        'form': form,
-        'knjiga_izdanje': knjiga_izdanje,
-    }
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
 
-    return render(request, 'app/knjiznicar.html', context)
+    def get_success_url(self):
+        return '/posudjeno'
 
 
 
@@ -154,7 +150,11 @@ class Posudiview(PermissionRequiredMixin, UpdateView):
     def get_success_url(self):
         return '/posuditi'
 
+class KnjigaOpisView(generic.DetailView):
+    model = Knjiga
     
+class AutorOpisView(generic.DetailView):
+    model = Autor
 
 
     

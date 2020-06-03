@@ -1,0 +1,19 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+<h1>Autor: {{ autor }} </h1>
+<p>{{autor.god_rodjenja}} - {% if autor.god_smrti %}{{autor.god_smrti}}{%else%}danas{% endif %}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>Knjige</h4>
+
+<dl>
+{% for knjiga in autor.knjiga_set.all %}
+  <dt><a href="{% url 'knjiga-opis' knjiga.pk %}">{{knjiga}}</a> ({{knjiga.knjigaizdanje_set.all.count}})</dt>
+  
+{% endfor %}
+</dl>
+
+</div>
+{% endblock %}

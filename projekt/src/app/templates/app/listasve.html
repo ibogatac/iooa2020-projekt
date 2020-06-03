@@ -4,16 +4,43 @@
     <h1>Sve posuđene knjige</h1>
 
     {% if knjigaizdanje_list %}
-    <ul>
+
+    <table class="table table-bordered">
+       <thead class="thead-dark">
+        <tr>
+      <th scope="col">Naziv</th>
+      <th scope="col">Datum vraćanja</th>
+      <th scope="col">Posuđivač</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+        </tr>
+      </thead>
 
       {% for knjigaizdanje in knjigaizdanje_list %} 
-      <li class="{% if bookinst.is_vratiti %}text-danger{% endif %}">
-        <a>{{knjigaizdanje.knjiga.naziv}}</a> ({{ knjigaizdanje.vracanje }}) {% if user.is_staff %}- {{ knjigaizdanje.posudjivac }}{% endif %} {% if perms.app.obnova %}- <a href="{% url 'knjiznicar' knjigaizdanje.id %}">Obnovi datum vraćanja</a> <a href="{% url 'vrati' knjigaizdanje.id %}">Vrati</a>{% endif %}
-      </li>
+     
+      <tbody>
+      
+      <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{knjigaizdanje.knjiga.naziv}}</td> 
+      <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{ knjigaizdanje.vracanje }}</td> 
+      <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{ knjigaizdanje.posudjivac }}</td>
+      <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}"><a href="{% url 'knjiznicar' knjigaizdanje.id %}">Obnovi datum vraćanja</a></td> 
+      <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}"><a href="{% url 'vrati' knjigaizdanje.id %}">Vrati</a></td>
+        
+      </tbody>
       {% endfor %}
-    </ul>
+    </table>
+
+    
 
     {% else %}
       <p>Nema posuđenih knjiga.</p>
-    {% endif %}       
+    {% endif %} 
+
+
 {% endblock %}
+
+
+
+
+
+  

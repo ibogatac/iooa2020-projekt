@@ -5,15 +5,18 @@
     <h1>Popis Knjiga</h1>
 
     {% if knjiga_list %}
-    <ul>
+    <div class="list-group">
 
       {% for knjiga in knjiga_list %}
-      <li>
-        <a>{{ knjiga.naziv }}</a> - {{knjiga.autor}}
-      </li>
+      <a href="{{ knjiga.get_absolute_url }}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{knjiga.naziv}}</h5>
+          <small>({{ knjiga.autor }})</small>
+        </div>
+      </a>
       {% endfor %}
 
-    </ul>
+   </div>
 
     {% else %}
       <p>Nema knjiga.</p>

@@ -1,0 +1,21 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+<h1>Naziv: {{ knjiga.naziv }}</h1>
+
+<p><strong>Autor:</strong> <a href="{% url 'autor-opis' knjiga.autor.pk %}">{{ knjiga.autor }}</a></p>  
+<p><strong>Žanr:</strong> {{ knjiga.zanr.all|join:", " }}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>Izdanja</h4>
+
+{% for izdanje in knjiga.knjigaizdanje_set.all %}
+<hr>
+<p class="{% if izdanje.status == 'd' %}text-success{% elif izdanje.status == 'p' %}text-danger{% endif %}">{{ izdanje.get_status_display }}</p>
+{% if izdanje.status != 'd' %}<p><strong>Potrebno vratiti:</strong> {{izdanje.vracanje}}</p>{% endif %}
+<p class="text-muted"><strong>Šifra izdanja:</strong> {{izdanje.id}}</p>
+
+{% endfor %}
+</div>
+{% endblock %}

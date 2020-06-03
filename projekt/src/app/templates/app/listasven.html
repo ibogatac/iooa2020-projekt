@@ -1,19 +1,40 @@
 {% extends "app/base.html" %}
 
 {% block content %}
-    <h1>Sve knjige za posuditi</h1>
+    <h1>Sve posuđene knjige</h1>
 
     {% if knjigaizdanje_list %}
-    <ul>
+
+    <table class="table table-bordered">
+       <thead class="thead-dark">
+        <tr>
+      <th scope="col">Naziv</th>
+      <th scope="col"></th>
+        </tr>
+      </thead>
 
       {% for knjigaizdanje in knjigaizdanje_list %} 
-      <li class="{% if bookinst.is_vratiti %}text-danger{% endif %}">
-        <a>{{knjigaizdanje.knjiga.naziv}}</a> {% if perms.app.obnova %}- <a href="{% url 'posudi' knjigaizdanje.id %}">Posudi</a>{% endif %}
-      </li>
+     
+      <tbody>
+      
+      <td>{{knjigaizdanje.knjiga.naziv}}</td> 
+      <td><a href="{% url 'posudi' knjigaizdanje.id %}">Posudi</a></td> 
+      
+        
+      </tbody>
       {% endfor %}
-    </ul>
+    </table>
+
+    
 
     {% else %}
-      <p>Nema neposuđenih.</p>
-    {% endif %}       
+      <p>Nema neposuđenih knjiga.</p>
+    {% endif %} 
+
+
 {% endblock %}
+
+
+
+
+
