@@ -57,9 +57,14 @@
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light"> <a href="{% url 'moje-knjige' %}">Moje posuđene knjige</a></li>
                 <li class="list-group-item list-group-item-light"> <a href="{% url 'knjige' %}">Sve knjige</a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'autori' %}">Autori</a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'zanrovi' %}">Žanrovi</a></li>
                 {% if perms.app.obnova %}
                 <li class="list-group-item list-group-item-light"> <a href="{% url 'posudjeno-sve' %}">Lista Posuđenih Knjiga</a></li>
-                <li class="list-group-item list-group-item-light"> <a href="{% url 'neposudjeno-sve' %}">Lista Neposuđenih Knjiga</a>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'neposudjeno-sve' %}">Lista Neposuđenih Knjiga</a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'autor-novi' %}">Unos autora</a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'knjiga-novi' %}">Unos knjige</a></li>
+                <li class="list-group-item list-group-item-light"> <a href="{% url 'zanr-novi' %}">Unos Žanra</a></li>
                 {%endif%}
               </ul>
             </p>

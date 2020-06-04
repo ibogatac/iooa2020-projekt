@@ -11,6 +11,8 @@
       <th scope="col">Naziv</th>
       <th scope="col">Datum vraćanja</th>
       <th scope="col">Posuđivač</th>
+      <th scope="col">Zakasnina</th>
+      <th scope="col">Izdanje</th>
       <th scope="col"></th>
       <th scope="col"></th>
         </tr>
@@ -23,6 +25,8 @@
       <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{knjigaizdanje.knjiga.naziv}}</td> 
       <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{ knjigaizdanje.vracanje }}</td> 
       <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{ knjigaizdanje.posudjivac }}</td>
+      <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{ knjigaizdanje.cijena }} kn</td>
+      <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}">{{knjigaizdanje.izdanje}}</td> 
       <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}"><a href="{% url 'knjiznicar' knjigaizdanje.id %}">Obnovi datum vraćanja</a></td> 
       <td class="{% if knjigaizdanje.vratiti %}table-danger{% endif %}"><a href="{% url 'vrati' knjigaizdanje.id %}">Vrati</a></td>
         

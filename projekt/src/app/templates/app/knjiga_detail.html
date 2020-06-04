@@ -14,6 +14,7 @@
 <hr>
 <p class="{% if izdanje.status == 'd' %}text-success{% elif izdanje.status == 'p' %}text-danger{% endif %}">{{ izdanje.get_status_display }}</p>
 {% if izdanje.status != 'd' %}<p><strong>Potrebno vratiti:</strong> {{izdanje.vracanje}}</p>{% endif %}
+<p class="text-muted"><strong>Izdanje:</strong> {{izdanje.izdanje}}</p>
 <p class="text-muted"><strong>Šifra izdanja:</strong> {{izdanje.id}}</p>
 
 {% endfor %}

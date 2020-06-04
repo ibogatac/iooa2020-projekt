@@ -11,16 +11,12 @@
     <span class="badge badge-primary badge-pill">{{br_knjiga}}</span>
   </li>
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    Izdanja
-    <span class="badge badge-primary badge-pill">{{br_izdanja}}</span>
+     <a href ="{% url 'autori' %}" >Autori</a>
+    <span class="badge badge-primary badge-pill">{{br_autora}}</span>
   </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Dostupne knjige
-    <span class="badge badge-primary badge-pill">{{br_izdanja_d}}</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    Posudjene knjige
-    <span class="badge badge-primary badge-pill">{{br_izdanja_p}}</span>
+   <li class="list-group-item d-flex justify-content-between align-items-center">
+     <a href ="{% url 'zanrovi' %}" >Žanrovi</a>
+    <span class="badge badge-primary badge-pill">{{br_zanrova}}</span>
   </li>
 </ul>
 

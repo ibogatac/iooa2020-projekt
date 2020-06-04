@@ -1,0 +1,35 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Popis Žanrova</h1>
+
+    {% if zanr_list %}
+    <table class="table table-bordered">
+       <thead class="thead-dark">
+        <tr>
+      <th scope="col">Naziv</th>
+      {% if perms.app.obnova %}
+      <th scope="col"></th>
+      {%endif%}
+        </tr>
+      </thead>
+
+      {% for zanr in zanr_list %}
+      <tbody>
+      
+      <td>{{zanr.naziv}}</td> 
+      {% if perms.app.obnova %}
+      <td><a href="{% url 'zanr-brisi' zanr.id %}">Izbriši</a></td> 
+      {%endif%}
+      </tbody>
+      {% endfor %}
+      </table>
+
+  
+
+    {% else %}
+      <p>Nema žanrova.</p>
+    {% endif %}   
+    {%endif%}    
+{% endblock %}

@@ -10,28 +10,24 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 from django.contrib.auth.decorators import permission_required
-from .forms import ObnoviForm
-from .forms import KnjigaIzdanjeForm
-from .forms import KnjigaIzdanjePForm
+from .forms import ObnoviForm, KnjigaIzdanjeForm, KnjigaIzdanjePForm, AutorForm, KnjigaForm, ZanrForm, KnjigaIzdanjeKForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
 @login_required
 def home(request):
-
-	br_knjiga = Knjiga.objects.all().count()
-	br_izdanja = KnjigaIzdanje.objects.all().count()
-	br_izdanja_d = KnjigaIzdanje.objects.filter(status__exact= 'd' ).count()
-	br_izdanja_p = KnjigaIzdanje.objects.filter(status__exact= 'p').count()
-	context = {
+    br_knjiga = Knjiga.objects.all().count()
+    br_autora = Autor.objects.all().count()
+    br_zanrova = Zanr.objects.all().count()
+    context = {
 		'br_knjiga': br_knjiga,
-		'br_izdanja': br_izdanja,
-		'br_izdanja_d': br_izdanja_d,
-		'br_izdanja_p': br_izdanja_p,
+        'br_autora': br_autora,
+        'br_zanrova': br_zanrova,
+		
 	}
-
-	return render(request, 'app/home.html', context)
+    return render(request, 'app/home.html', context)
 class SecretPage(LoginRequiredMixin, TemplateView):
     template_name = 'app/home.html'
 
@@ -65,6 +61,14 @@ class PosudjeneKnjigePoKorisnicima(LoginRequiredMixin, generic.ListView):
 
 class ListaKnjiga(LoginRequiredMixin,generic.ListView):
     model = Knjiga
+    paginate_by = 10
+
+class ListaAutora(LoginRequiredMixin,generic.ListView):
+    model = Autor
+    paginate_by = 10
+
+class ListaZanr(LoginRequiredMixin,generic.ListView):
+    model = Zanr
     paginate_by = 10
 
 
@@ -155,6 +159,48 @@ class KnjigaOpisView(generic.DetailView):
     
 class AutorOpisView(generic.DetailView):
     model = Autor
+
+class AutorDelete(PermissionRequiredMixin, DeleteView):
+    model = Autor
+    success_url = reverse_lazy('autori')
+    permission_required = 'app.obnova'
+
+class AutorCreate(PermissionRequiredMixin, CreateView):
+    model = Autor
+    form_class = AutorForm
+    permission_required = 'app.obnova'
+
+class KnjigaDelete(PermissionRequiredMixin, DeleteView):
+    model = Knjiga
+    success_url = reverse_lazy('knjige')
+    permission_required = 'app.obnova'
+
+class KnjigaCreate(PermissionRequiredMixin, CreateView):
+    model = Knjiga
+    form_class = KnjigaForm
+    permission_required = 'app.obnova'
+
+
+class ZanrCreate(PermissionRequiredMixin, CreateView):
+    model = Zanr
+    form_class = ZanrForm
+    permission_required = 'app.obnova'
+    success_url = reverse_lazy('zanrovi')
+
+class KnjigaIzdanjeCreate(PermissionRequiredMixin, CreateView):
+    model = KnjigaIzdanje
+    form_class = KnjigaIzdanjeKForm
+    permission_required = 'app.obnova'
+    success_url = reverse_lazy('knjige')
+
+class ZanrDelete(PermissionRequiredMixin, DeleteView):
+    model = Zanr
+    success_url = reverse_lazy('zanrovi')
+    permission_required = 'app.obnova'
+
+
+
+
 
 
     

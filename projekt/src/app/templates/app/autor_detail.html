@@ -3,17 +3,21 @@
 {% block content %}
 
 <h1>Autor: {{ autor }} </h1>
-<p>{{autor.god_rodjenja}} - {% if autor.god_smrti %}{{autor.god_smrti}}{%else%}danas{% endif %}</p>
+<p>Životni vijek: {{autor.god_rodjenja}}-{% if autor.god_smrti %}{{autor.god_smrti}}{%else%}danas{% endif %}</p>
 
 <div style="margin-left:20px;margin-top:20px">
-<h4>Knjige</h4>
+<h4>Knjige:</h4>
 
 <dl>
+	<ul class="list-group">
 {% for knjiga in autor.knjiga_set.all %}
-  <dt><a href="{% url 'knjiga-opis' knjiga.pk %}">{{knjiga}}</a> ({{knjiga.knjigaizdanje_set.all.count}})</dt>
-  
+	<li class="list-group-item d-flex justify-content-between align-items-center">
+	<a href="{% url 'knjiga-opis' knjiga.pk %}">{{knjiga}}</a>
+	<span class="badge badge-primary badge-pill">{{knjiga.knjigaizdanje_set.all.count}}</span>
+        
+      
 {% endfor %}
-</dl>
+</ul>
 
 </div>
 {% endblock %}

@@ -9,6 +9,7 @@
        <thead class="thead-dark">
         <tr>
       <th scope="col">Naziv</th>
+      <th scope="col">Izdanje</th>
       <th scope="col"></th>
         </tr>
       </thead>
@@ -17,7 +18,8 @@
      
       <tbody>
       
-      <td>{{knjigaizdanje.knjiga.naziv}}</td> 
+      <td>{{knjigaizdanje.knjiga.naziv}}</td>
+      <td>{{knjigaizdanje.izdanje}}</td> 
       <td><a href="{% url 'posudi' knjigaizdanje.id %}">Posudi</a></td> 
       
         

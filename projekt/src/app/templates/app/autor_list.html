@@ -1,0 +1,35 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Popis Autora</h1>
+
+    {% if autor_list %}
+    <table class="table table-bordered">
+       <thead class="thead-dark">
+        <tr>
+      <th scope="col">Naziv</th>
+      {% if perms.app.obnova %}
+      <th scope="col"></th>
+      {%endif%}
+        </tr>
+      </thead>
+
+      {% for autor in autor_list %}
+      <tbody>
+      
+      <td><a href="{{ autor.get_absolute_url }}">{{autor.prezime}},{{autor.ime}}</a></td> 
+      {% if perms.app.obnova %}
+      <td><a href="{% url 'autor-brisi' autor.id %}">Izbriši</a></td> 
+      {%endif%}
+      </tbody>
+      {% endfor %}
+      </table>
+
+  
+
+    {% else %}
+      <p>Nema autora.</p>
+    {% endif %}   
+    {%endif%}    
+{% endblock %}
