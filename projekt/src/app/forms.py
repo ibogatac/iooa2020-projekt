@@ -61,6 +61,7 @@ class AutorForm(forms.ModelForm):
         label= 'Godina rođenja'
         )
     god_smrti = forms.DateField(
+        required = False,
         widget=forms.DateInput(format='%d.%m.%Y'),
         input_formats=('%d.%m.%Y', ),
         label= 'Godina smrti'
