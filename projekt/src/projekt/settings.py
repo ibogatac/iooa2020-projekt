@@ -25,7 +25,7 @@ SECRET_KEY = '-5mrd(4y9p7&9dp+=9z!620f^n9lxf5u@e+*!^51^uxfkcbd1('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'crispy_forms',
+    'django_extensions',
+    'django_filters',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -129,3 +131,13 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL ='/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+def FILTERS_VERBOSE_LOOKUPS():
+    from django_filters.conf import DEFAULTS
+
+    verbose_lookups = DEFAULTS['VERBOSE_LOOKUPS'].copy()
+    verbose_lookups.update({
+        'icontains': '',
+    })
+    return verbose_lookups

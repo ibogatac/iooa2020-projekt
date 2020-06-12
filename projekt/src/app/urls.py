@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
 	path('', views.home, name='Knjiznica-home'),
+    path('registered/', views.home, name='Knjiznica-registered'),
     #path('pknjige/', views.pknjige, name='Knjiznica-pknjige'),
    	#path('nknjige/', views.nknjige, name='Knjiznica-neposudjene knjige'),
     path('mknjige/', views.PosudjeneKnjigePoKorisnicima.as_view(), name='moje-knjige'),
@@ -23,4 +25,5 @@ urlpatterns = [
     path('knjigai/novi', views.KnjigaIzdanjeCreate.as_view(), name='knjigai-novi'),
     path('zanrovi/', views.ListaZanr.as_view(), name='zanrovi'),
     path('zanr/<int:pk>/brisi/', views.ZanrDelete.as_view(), name='zanr-brisi'),
+    path("register/", views.register, name="register"),
 ]

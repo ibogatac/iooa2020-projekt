@@ -14,7 +14,21 @@ from .forms import ObnoviForm, KnjigaIzdanjeForm, KnjigaIzdanjePForm, AutorForm,
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from .filters import KnjigaFilter
+from .forms import RegisterForm
 
+
+def register(response):
+    if response.method == "POST":
+        form = RegisterForm(response.POST)
+        if form.is_valid():
+            form.save()
+
+        return redirect('/registered')
+    else:
+        form = RegisterForm()
+
+    return render(response, "registration/register.html", {"form":form})
 
 @login_required
 def home(request):
@@ -62,6 +76,11 @@ class PosudjeneKnjigePoKorisnicima(LoginRequiredMixin, generic.ListView):
 class ListaKnjiga(LoginRequiredMixin,generic.ListView):
     model = Knjiga
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['filter'] = KnjigaFilter(self.request.GET, queryset= self.get_queryset())
+        return context
 
 class ListaAutora(LoginRequiredMixin,generic.ListView):
     model = Autor

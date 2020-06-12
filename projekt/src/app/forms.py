@@ -4,6 +4,18 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 import datetime 
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        fields = ["username", "email", "password1", "password2"]
+        help_texts = {
+            'username': None,
+            'email': None,
+        }
 
 class KnjigaForm(forms.ModelForm):
     class Meta:
@@ -34,6 +46,7 @@ class KnjigaIzdanjeForm(forms.ModelForm):
         model = KnjigaIzdanje
         fields = ['status','posudjivac','vracanje']
     vracanje = forms.DateField(
+        required = False,
         widget=forms.DateInput(format='%d.%m.%Y'),
         input_formats=('%d.%m.%Y', ),
         label = 'Vraćanje'
@@ -75,14 +88,9 @@ class ZanrForm(forms.ModelForm):
 class KnjigaIzdanjeKForm(forms.ModelForm):
     class Meta:
         model = KnjigaIzdanje
-        fields = ['knjiga', 'izdanje', 'vracanje', 'posudjivac', 'status']
+        fields = ['knjiga', 'izdanje']
 
-    vracanje = forms.DateField(
-        required = False,
-        widget=forms.DateInput(format='%d.%m.%Y'),
-        input_formats=('%d.%m.%Y', ),
-        label = 'Vraćanje'
-        )
+    
 
 
 

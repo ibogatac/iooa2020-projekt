@@ -104,10 +104,12 @@ class KnjigaIzdanje(models.Model):
         a = datetime.strptime(str(datetime.now().date()), date_format)
         b = datetime.strptime(str(self.vracanje), date_format)
         delta = a-b
-        delta_a= delta * 5
-
-        return delta_a.days
-
+        if delta.days > 0:
+            delta_a= delta * 5
+            return delta_a.days
+        else:
+            delta_a = 0
+            return delta_a
 
 
 

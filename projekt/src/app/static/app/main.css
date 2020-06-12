@@ -34,4 +34,15 @@ ul {
   left: 50%;
 }
 
+#mybutton{
+  position: absolute; /* or absolute */
+  top: 70%;
+  left: 37%;  
+}
+
+#mybutton2{
+  position: absolute; /* or absolute */
+  top: 100%;
+  left: 37%;  
+}
 

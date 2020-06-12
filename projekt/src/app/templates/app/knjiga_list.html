@@ -1,9 +1,17 @@
 {% extends "app/base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 {% if user.is_authenticated %}
     <h1>Popis Knjiga</h1>
+<div class="input-group mb-3">
+<div>
+    <form method ="GET">
+<button type ="submit" id="mybutton" class = "btn btn-primary">Filtriraj</button>
+{{filter.form|crispy}}
 
+</form>
+</div>
+</div>
     {% if knjiga_list %}
     <table class="table table-bordered">
        <thead class="thead-dark">
@@ -19,7 +27,7 @@
       
       </thead>
 
-      {% for knjiga in knjiga_list %}
+      {% for knjiga in filter.qs %}
       <tbody>
       
       <td><a href="{{ knjiga.get_absolute_url }}">{{knjiga.naziv}}</a></td>
